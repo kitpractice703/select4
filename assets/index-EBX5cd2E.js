@@ -204,7 +204,7 @@ Please change the parent <Route path="${L}"> to <Route path="${L==="/"?"*":`${L}
   min-height: 100vh;
   position: relative;
   z-index: ${({theme:n})=>n.zIndex.content};
-`,KO=()=>{const[n,a]=T.useState(!1);return Q.jsxs(Q.Fragment,{children:[Q.jsx(BO,{}),Q.jsx(zO,{onCartClick:()=>a(!0),cartCount:0}),Q.jsx(kO,{children:Q.jsx(AE,{})}),Q.jsx(NO,{}),Q.jsx(XO,{isOpen:n,onClose:()=>a(!1)})]})},Qi=29,ZO=1,KS=n=>`/images/model-360-1/frame-${String(n+ZO).padStart(2,"0")}.png`,QO=Array.from({length:Qi},(n,a)=>KS(a)),PO=nt.div`
+`,KO=()=>{const[n,a]=T.useState(!1);return Q.jsxs(Q.Fragment,{children:[Q.jsx(BO,{}),Q.jsx(zO,{onCartClick:()=>a(!0),cartCount:0}),Q.jsx(kO,{children:Q.jsx(AE,{})}),Q.jsx(NO,{}),Q.jsx(XO,{isOpen:n,onClose:()=>a(!1)})]})},Qi=29,ZO=1,KS=n=>`/select4/images/model-360-1/frame-${String(n+ZO).padStart(2,"0")}.png`,QO=Array.from({length:Qi},(n,a)=>KS(a)),PO=nt.div`
   position: relative;
   width: 100%;
   height: 100%;
