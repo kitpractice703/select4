@@ -4,11 +4,12 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import RotatingViewer from '../components/viewer/RotatingViewer';
 
+// 페이지 전체를 감싸는 레이아웃 컨테이너
 const HomeWrapper = styled.div`
   width: 100%;
 `;
 
-/* ── Hero Section with 360° Viewer ── */
+/* ── 히어로 섹션: 360° 뷰어가 표시되는 메인 영역 ── */
 const HeroSection = styled.section`
   height: 100vh;
   display: flex;
@@ -19,12 +20,14 @@ const HeroSection = styled.section`
   overflow: hidden;
 `;
 
+// 360° 뷰어를 담는 컨테이너
 const HeroViewerContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
 `;
 
+// 히어로 우측에 떠 있는 시즌/룩 정보 오버레이
 const HeroOverlayInfo = styled.div`
   position: absolute;
   top: 50%;
@@ -52,7 +55,7 @@ const LookTitle = styled.h2`
   letter-spacing: -0.02em;
 `;
 
-/* ── Manifesto Section ── */
+/* ── 매니페스토 섹션: 스크롤 시 한 단어씩 나타나는 브랜드 문구 ── */
 const ManifestoSection = styled.section`
   min-height: 100vh;
   display: flex;
@@ -71,7 +74,7 @@ const ManifestoText = styled(motion.p)`
   max-width: 1000px;
 `;
 
-/* ── Collection Preview ── */
+/* ── 컬렉션 프리뷰 섹션: 상품 카드 목록 ── */
 const CollectionSection = styled.section`
   min-height: 100vh;
   display: flex;
@@ -139,6 +142,7 @@ const CollectionCard = styled(motion.div)`
   }
 `;
 
+// 컬렉션 하단의 "DISCOVER" 링크
 const DiscoverLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -160,7 +164,7 @@ const ProductCount = styled.span`
   opacity: 0.5;
 `;
 
-/* ── Word-by-word scroll animation component ── */
+/* ── 스크롤 진행도에 따라 단어별로 서서히 나타나는 텍스트 컴포넌트 ── */
 const WordContainer = styled.span`
   display: inline;
 `;
@@ -170,6 +174,7 @@ const AnimatedWord = styled(motion.span)`
   margin-right: 0.3em;
 `;
 
+// 전체 문장을 단어 단위로 분리하여 스크롤 진행도에 따라 투명도를 변경
 const ScrollRevealText: React.FC<{ text: string; progress: import('framer-motion').MotionValue<number> }> = ({
   text,
   progress,
@@ -189,6 +194,7 @@ const ScrollRevealText: React.FC<{ text: string; progress: import('framer-motion
   );
 };
 
+// 개별 단어의 투명도를 스크롤 진행도 범위에 따라 제어
 const Word: React.FC<{
   word: string;
   range: [number, number];
@@ -198,8 +204,9 @@ const Word: React.FC<{
   return <AnimatedWord style={{ opacity }}>{word}</AnimatedWord>;
 };
 
-/* ── Page Component ── */
+/* ── 홈페이지 컴포넌트 ── */
 const HomePage: React.FC = () => {
+  // 매니페스토 섹션의 스크롤 진행도를 추적하는 ref
   const manifestoRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: manifestoRef,
@@ -216,7 +223,7 @@ const HomePage: React.FC = () => {
 
   return (
     <HomeWrapper>
-      {/* Hero - 360° Rotating Model Viewer */}
+      {/* 히어로: 360° 회전 모델 뷰어 */}
       <HeroSection>
         <HeroViewerContainer>
           <RotatingViewer autoRotate={true} />
@@ -227,7 +234,7 @@ const HomePage: React.FC = () => {
         </HeroViewerContainer>
       </HeroSection>
 
-      {/* Manifesto with word-by-word scroll reveal */}
+      {/* 매니페스토: 스크롤 시 단어별로 나타나는 브랜드 문구 */}
       <ManifestoSection ref={manifestoRef}>
         <ManifestoText>
           <ScrollRevealText
@@ -237,7 +244,7 @@ const HomePage: React.FC = () => {
         </ManifestoText>
       </ManifestoSection>
 
-      {/* Collection Preview */}
+      {/* 컬렉션 프리뷰: 상품 카드 그리드 */}
       <CollectionSection>
         <CollectionLabel>SEASON 01 / 01</CollectionLabel>
         <CollectionTitle

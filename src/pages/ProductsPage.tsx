@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-/* ── Mock data ── */
+// 임시 상품 데이터 (백엔드 연동 전 목업용)
 const MOCK_PRODUCTS = Array.from({ length: 21 }, (_, i) => ({
   id: i + 1,
   number: String(i + 1).padStart(2, '0'),
@@ -10,18 +10,22 @@ const MOCK_PRODUCTS = Array.from({ length: 21 }, (_, i) => ({
   slug: `product-${i + 1}`,
 }));
 
+// 카테고리(캡슐) 목록 데이터
 const CATEGORIES = [
   { id: 1, label: 'CAPSULE 01 / 02', title: 'SIGNATURE DROP', count: 21 },
   { id: 2, label: 'CAPSULE 02 / 02', title: 'BASICS', count: 6 },
 ];
 
-/* ── Styled Components ── */
+/* ── 스타일 컴포넌트 ── */
+
+// 페이지 전체 래퍼 (상하 여백 포함)
 const PageWrapper = styled.div`
   padding-top: 120px;
   padding-bottom: 100px;
   min-height: 100vh;
 `;
 
+// 우측 상단 고정 뷰 토글 영역
 const ViewToggle = styled.div`
   position: fixed;
   top: ${({ theme }) => theme.spacing.lg};
@@ -40,6 +44,7 @@ const ViewLabel = styled.span`
   opacity: 0.5;
 `;
 
+// 카테고리 헤더: 캡슐 라벨 + 제목
 const CategoryHeader = styled.div`
   padding: 0 ${({ theme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }) => theme.spacing['2xl']};
@@ -54,6 +59,7 @@ const CategoryLabel = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
+// 카테고리 제목 (등장 애니메이션 적용)
 const CategoryTitle = styled(motion.h1)`
   font-size: ${({ theme }) => theme.fontSizes['4xl']};
   font-weight: ${({ theme }) => theme.fontWeights.black};
@@ -66,6 +72,7 @@ const CategoryTitle = styled(motion.h1)`
   }
 `;
 
+// 상품 수 정보 영역
 const ProductsInfo = styled.div`
   padding: 0 ${({ theme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }) => theme.spacing.xl};
@@ -87,6 +94,7 @@ const ProductsCount = styled.span`
   opacity: 0.5;
 `;
 
+// 반응형 상품 그리드 (데스크톱 6열 → 태블릿 4열 → 모바일 2열)
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -106,6 +114,7 @@ const Grid = styled.div`
   }
 `;
 
+// 개별 상품 카드 (호버 시 배경색 변경)
 const ProductCard = styled(motion.div)`
   position: relative;
   padding: ${({ theme }) => theme.spacing.lg};
@@ -114,6 +123,7 @@ const ProductCard = styled(motion.div)`
   overflow: hidden;
 `;
 
+// 상품 이미지 자리 (현재 플레이스홀더)
 const ProductImagePlaceholder = styled.div`
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -162,7 +172,7 @@ const StyledLink = styled(Link)`
   display: block;
 `;
 
-/* ── Page Component ── */
+/* ── 상품 목록 페이지 컴포넌트 ── */
 const ProductsPage: React.FC = () => {
   const category = CATEGORIES[0];
 
@@ -173,6 +183,7 @@ const ProductsPage: React.FC = () => {
         PRODUCTS
       </ViewToggle>
 
+      {/* 카테고리 헤더: 캡슐 라벨 + 타이틀 */}
       <CategoryHeader>
         <CategoryLabel>{category.label}</CategoryLabel>
         <CategoryTitle
@@ -184,11 +195,13 @@ const ProductsPage: React.FC = () => {
         </CategoryTitle>
       </CategoryHeader>
 
+      {/* 상품 수 표시 */}
       <ProductsInfo>
         <ProductsLabel>PRODUCTS</ProductsLabel>
         <ProductsCount>{category.count}</ProductsCount>
       </ProductsInfo>
 
+      {/* 상품 카드 그리드 */}
       <Grid>
         {MOCK_PRODUCTS.map((product, index) => (
           <StyledLink to={`/products/${product.slug}`} key={product.id}>
